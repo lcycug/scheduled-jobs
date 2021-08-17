@@ -4,7 +4,7 @@
  * @description This component is used to
  */
 @IsTest
-private class SchedulerTest {
+private class LogDeletionSchedulerTest {
     @TestSetup
     static void init() {
         Test.startTest();
@@ -18,7 +18,7 @@ private class SchedulerTest {
     @IsTest
     static void testDeletingLogs() {
         Test.startTest();
-        System.schedule('test', '0 0 12 1 * ?', new Scheduler());
+        System.schedule('test', '0 0 12 1 * ?', new LogDeletionScheduler());
         Test.stopTest();
         System.assert([SELECT COUNT() FROM Log__c] == 0);
     }
