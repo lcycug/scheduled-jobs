@@ -5,6 +5,6 @@
  */
 public with sharing class LogDeletionScheduler implements Schedulable {
     public void execute(SchedulableContext objSC) {
-        delete [SELECT Id FROM Log__c];
+        delete [SELECT Id FROM Log__c ORDER BY CreatedDate ASC LIMIT 10000];
     }
 }
