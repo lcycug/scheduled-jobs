@@ -1,7 +1,7 @@
 /**
  * @author Sean Lee
  * @date 2021-08-16
- * @description This component is used to
+ * @description This is the test class of
  */
 @IsTest
 private class LogDeletionSchedulerTest {
@@ -18,8 +18,9 @@ private class LogDeletionSchedulerTest {
     @IsTest
     static void testDeletingLogs() {
         Test.startTest();
+        System.assert([SELECT COUNT() FROM Log__c LIMIT 200] == 100);
         System.schedule('test', '0 0 12 1 * ?', new LogDeletionScheduler());
         Test.stopTest();
-        System.assert([SELECT COUNT() FROM Log__c] == 0);
+        System.assert([SELECT COUNT() FROM Log__c LIMIT 200] == 0);
     }
 }
