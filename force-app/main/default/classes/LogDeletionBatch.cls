@@ -9,7 +9,7 @@ public with sharing class LogDeletionBatch implements Database.Batchable<SObject
         return Database.getQueryLocator([SELECT Id FROM Log__c]);
     }
     public void execute(Database.BatchableContext objBC, List<Log__c> lstLog) {
-        delete lstLog;
+        System.enqueueJob(new LogDeletionQueueable(lstLog));
     }
     public void finish(Database.BatchableContext objBC) {
     }
