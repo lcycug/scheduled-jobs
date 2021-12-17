@@ -1,16 +1,16 @@
 /**
  * @author Sean Lee
  * @date 2021-12-16
- * @description This class is used to
+ * @description This is the test class of LogDeletionQueue.
  */
 @IsTest
-private class LogDeletionQueueableTest {
+private class LogDeletionQueueTest {
     @IsTest
     static void testNull() {
         Test.startTest();
         insert new Log__c();
         System.assertEquals(1, [SELECT COUNT() FROM Log__c LIMIT 10]);
-        Id idJob = System.enqueueJob(new LogDeletionQueueable(null));
+        Id idJob = System.enqueueJob(new LogDeletionQueue(null));
         Test.stopTest();
         System.assertNotEquals(null, idJob);
         System.assertEquals(1, [SELECT COUNT() FROM Log__c LIMIT 10]);
@@ -20,7 +20,7 @@ private class LogDeletionQueueableTest {
         Test.startTest();
         insert new Log__c();
         System.assertEquals(1, [SELECT COUNT() FROM Log__c LIMIT 10]);
-        Id idJob = System.enqueueJob(new LogDeletionQueueable(new List<Log__c>()));
+        Id idJob = System.enqueueJob(new LogDeletionQueue(new List<Log__c>()));
         Test.stopTest();
         System.assertNotEquals(null, idJob);
         System.assertEquals(1, [SELECT COUNT() FROM Log__c LIMIT 10]);
@@ -31,7 +31,7 @@ private class LogDeletionQueueableTest {
         Log__c objLog = new Log__c();
         insert objLog;
         System.assertEquals(1, [SELECT COUNT() FROM Log__c LIMIT 10]);
-        Id idJob = System.enqueueJob(new LogDeletionQueueable(new List<Log__c>{ objLog }));
+        Id idJob = System.enqueueJob(new LogDeletionQueue(new List<Log__c>{ objLog }));
         Test.stopTest();
         System.assertNotEquals(null, idJob);
         System.assertEquals(0, [SELECT COUNT() FROM Log__c LIMIT 10]);
